@@ -1,0 +1,406 @@
+
+
+//FindChangeList.txt
+//A support file for the InDesign CS4 JavaScript FindChangeByList.jsx
+//
+// Designiq v2.0
+// 23.10.2012 Ăşprava o.s., s.r.o. apod., emaily majĂ­ atribut bez dÄlenĂ­, novĂŠ fyzikĂĄlnĂ­ a ÄasovĂŠ jednotky, ain't, I'm ad.
+// 
+//
+//This data file is tab-delimited, with carriage returns separating records.
+//
+
+// spacje
+
+grep	{findWhat:"(~S|~s|~<|~>|~m|~|| )+"}	{changeTo:" "}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	vĹĄechny mezery na zĂĄkladnĂ­ mezeru
+
+
+//style znakowe, italic, bold italic 
+
+
+grep	{findWhat:".", appliedLanguage:"English: USA"}	{changeTo:"$0",appliedLanguage:"English: UK"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	English: USA â> English: UK
+
+grep	{findWhat:".", fontStyle:"Italic"}	{changeTo:"$0",appliedCharacterStyle:"italic"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	styl Italic 
+
+
+grep	{findWhat:".",fontStyle:"Bold Italic"}	{changeTo:"$0",appliedCharacterStyle:"italic"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	styl Bold Italic
+
+//cyfry nautyczne 
+
+grep	{findWhat:"(\\d)", fontStyle:"Regular"}	{changeTo:"$1",appliedCharacterStyle:"sc"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}
+
+grep	{findWhat:"(\\d)", fontStyle:"Italic"}	{changeTo:"$1",appliedCharacterStyle:"italic sc"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}
+
+//small caps
+
+grep	{findWhat:"(\\u\\u+)", fontStyle:"Regular"}	{changeTo:"$1",appliedCharacterStyle:"sc"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//skroty XYZ
+
+grep	{findWhat:"(\\u\\u+)", fontStyle:"Italic"}	{changeTo:"$1",appliedCharacterStyle:"italic sc"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//skroty XYZ italic
+
+grep	{findWhat:"\\u(?=\\l\\u)", fontStyle:"Regular"}	{changeTo:"$0",appliedCharacterStyle:"sc"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//skroty XyZ 
+
+grep	{findWhat:"\\u(?=\\l\\u)", fontStyle:"Italic"}	{changeTo:"$0",appliedCharacterStyle:"italic sc"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//skroty XyZ italic
+
+grep	{findWhat:"(?<=\\u\\l)\\u", fontStyle:"Regular"}	{changeTo:"$0",appliedCharacterStyle:"sc"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//skroty XyZ
+
+grep	{findWhat:"(?<=\\u\\l)\\u", fontStyle:"Italic"}	{changeTo:"$0",appliedCharacterStyle:"italic sc"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//skroty XyZ italic
+
+
+//przypisy
+
+grep	{findWhat:"(.)\\s?(?=~F)"}	{changeTo:"$1"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	 
+//wyrzucanie spacji przed przypisem
+
+grep	{findWhat:"([dgijltwvxyzÄĹĹĹźĹşââ\\!\\?])(?=~F)"}	{changeTo:"$1~|"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	 
+//spacja wĹosowa miÄdzy niektĂłrymi znakami a przypisem 
+
+grep	{findWhat:"(f)(?=~F)"}	{changeTo:"$1~<"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	 
+//spacja cienka miÄdzy "f" a przypisem 
+
+grep	{findWhat:"(?<=~F|â|â)(\\.|\\,)"}	{changeTo:"~%$1"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	 //spacja ujemna miedzy przypisem lub cudzysĹowem a kropkÄ lub przecinkiem 
+
+grep	{findWhat:"~%"}	{changeTo:"$0",appliedCharacterStyle:"spacja ~%"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	spacja ~%
+
+grep	{findWhat:"(\\w)(?=~F)",appliedCharacterStyle:"italic" }	{changeTo:"$1~|"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	 
+//spacja wĹosowa miÄdzy niektĂłrymi znakami a przypisem 
+
+
+
+//spĂłjniki
+
+grep	{findWhat:"(\\<[szkvaiouSZKVAIOU])[ ]+", appliedLanguage:"Czech"}	{changeTo:"$1~S", changeConditionsMode:1919250519}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	jednoznakovĂŠ pĹedloĹžky a spojky CZ
+grep	{findWhat:"(\\<[aikosuvzAIKOSUVZ])[ ]+", appliedLanguage:"Slovak"}	{changeTo:"$1~S", changeConditionsMode:1919250519}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	jednoznakovĂŠ pĹedloĹžky a spojky SK
+grep	{findWhat:"(\\<[aiouwzAIOUWZ])[ ]+", appliedLanguage:"Polish"}	{changeTo:"$1~S", changeConditionsMode:1919250519}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	jednoznakovĂŠ pĹedloĹžky a spojky PL
+grep	{findWhat:"(\\<[aAI])[ ]+", appliedLanguage:"English: UK"}	{changeTo:"$1~S", changeConditionsMode:1919250519}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	jednoznakovĂŠ pĹedloĹžky a spojky EN
+
+
+//spacje
+
+grep	{findWhat:"([\\l\\u]\\l)~S([\\l\\u])"}	{changeTo:"$1 $2"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	OdstranÄnĂ­ PMEZ po vĂ­ceznakovĂŠm slovÄ.
+grep	{findWhat:"\\r "}	{changeTo:"\\r"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	Find all returns followed by a space And replace with single returns.
+grep	{findWhat:" \\r"}	{changeTo:"\\r"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	Find all returns followed by a space and replace with single returns.
+grep	{findWhat:"\\t\\t+"}	{changeTo:"\t"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	Find all double tab characters and replace with single tab characters.
+grep	{findWhat:"\\r\\t"}	{changeTo:"\r"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	Find all returns followed by a tab character and replace with single returns.
+grep	{findWhat:"\\t\\r"}	{changeTo:"\r"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	Find all returns followed by a tab character and replace with single returns.
+//grep	{findWhat:"\r\r+"}	{changeTo:"\r"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	Find all double returns and replace with single returns.
+
+//taby
+grep	{findWhat:"^\\t"}	{changeTo:"\r"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	Find all returns followed by a tab character and replace with single returns.
+
+
+//kreski
+
+grep	{findWhat:"(\\w)(\\/)(\\w)"}	{changeTo:"$1~|$2~|$3"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	 //slash wewnatrz sĹowa
+
+grep	{findWhat:"(\\w)\\s(\\/)\\s(\\w)"}	{changeTo:"$1~<$2~<$3"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	 //slash miÄdzy sĹowami
+
+grep	{findWhat:"(\\w)\\s(-|â|â)\\s(\\w)"}	{changeTo:"$1~S~=~S$3"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	 //myĹlnik miÄdzy sĹowami
+
+grep	{findWhat:"(\\w)(-|â|â)(\\w)"}	{changeTo:"$1-$3"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	 //dywiz w sĹowie
+
+grep	{findWhat:"(\\d)\\s?(-|â|â)\\s?(\\d)"}	{changeTo:"$1~|~=~|$3"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true} //zakresy liczbowe
+
+grep	{findWhat:"~=~|(1)"}	{changeTo:"~=$1"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	
+
+
+
+
+text	{findWhat:"...."}	{changeTo:"âŚ"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	ÄtyĹi teÄky na trojteÄku
+text	{findWhat:"..."}	{changeTo:"âŚ"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	tĹi teÄky na trojteÄku
+text	{findWhat:"âŚ."}	{changeTo:"âŚ"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	trojteÄka a teÄka na trojteÄku
+text	{findWhat:".."}	{changeTo:"."}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	dvÄ teÄky na teÄku
+grep	{findWhat:" (\\.|\\,|\\;|\\:|\\?|\\!|\\)|\\]|\\})"}	{changeTo:"$1"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	zruĹĄit mezeru pĹed interpunkcĂ­
+grep	{findWhat:"(\\(|\\[|\\â|\\â|\\{) "}	{changeTo:"$1"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	zruĹĄit mezeru za zĂĄvorkami
+text	{findWhat:"Âť"}	{changeTo:"â"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	francouzskĂŠ uvozovky na ÄeskĂŠ (pravĂĄ)
+text	{findWhat:"ÂŤ"}	{changeTo:"â"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	francouzskĂŠ uvozovky na ÄeskĂŠ (levĂĄ)
+
+//apostrof
+text	{findWhat:"Â´"}	{changeTo:"â"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	acute na apostrof
+grep	{findWhat:"(D|d|L|l)(\\â)(?=\\w)"}	{changeTo:"$1â"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	apostrof po d a l
+grep	{findWhat:"(?<=\\w)(\\â)(s|S)"}	{changeTo:"â$2"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	apostrof pĹed s
+grep	{findWhat:"ain(\\â)t"}	{changeTo:"ainât"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	apostrof ain't
+grep	{findWhat:"I(\\â)m"}	{changeTo:"Iâm"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	apostrof I'm
+
+//uvozovky, jazykovÄ specifickĂŠ ĹeĹĄenĂ­
+
+grep	{findWhat:"(\\s)([ââ])", appliedLanguage:"Czech"}	{changeTo:"$2", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// Mezera pĹed koncovĂ˝mi uvozovkami (pouze v ÄeĹĄtinÄ)
+grep	{findWhat:"([ââ])(\\s)", appliedLanguage:"English: UK"}	{changeTo:"$1", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// Mezera za ĂşvodnĂ­mi uvozovkami (pouze v angliÄtinÄ UK)
+grep	{findWhat:"([ââ])(\\s)", appliedLanguage:"English: USA"}	{changeTo:"$1", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// Mezera za ĂşvodnĂ­mi uvozovkami (pouze v angliÄtinÄ USA)
+grep	{findWhat:"(\\s)([ââ])", appliedLanguage:"English: UK"}	{changeTo:"$2", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// Mezera pĹed koncovĂ˝mi uvozovkami (pouze v angliÄtinÄ UK)
+grep	{findWhat:"(\\s)([ââ])", appliedLanguage:"English: USA"}	{changeTo:"$2", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// Mezera pĹed koncovĂ˝mi uvozovkami (pouze v angliÄtinÄ USA)
+grep	{findWhat:"(\\s)([ââ])", appliedLanguage:"Polish"}	{changeTo:"$2", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// spacja prized zamykajÄcym cudzysĹowem (pouze v polĹĄtinÄ)
+
+
+
+
+//skrĂłty rĂłzne
+
+grep	{findWhat:"( \\l\\.)\\s?(\\l\\.)"}	{changeTo:"$1$2"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//skroty x.y. 
+
+grep	{findWhat:"( \\l\\l\\.)\\s?(\\l\\.)"}	{changeTo:"$1$2"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//skroty xy.z.
+
+grep	{findWhat:"( \\l\\.)\\s?(\\l\\l\\.)"}	{changeTo:"$1$2"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//skroty x.yz
+
+
+grep	{findWhat:"(\\s)(ÂŠ|â|s\\.|r\\.|cz\\.|ss\\.|k\\.|z\\.|str\\.||t\\.|vol\\.|ur\\.|zm\\.|ul\\.|Al\\.|pl\\.|dn\\.|doc\\.|zob\\.|rec\\.|red\\.|oprac\\.|tĹum\\.|wyd\\.|druk\\|.sygn\\.|przyp\\.|prof\\.) (\\w|\\d)"}	{changeTo:"$1$2~>$3"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	nieĹamliwa spacja po skrĂłtach przed cyfrÄ lub sĹowem
+
+grep	{findWhat:"~>"}	{changeTo:"~S",appliedCharacterStyle:"50%"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	nielamliwa spacja po skrĂłtach przed cyfrÄ
+
+
+grep	{findWhat:"(dr|mgr) (\\u\\l|u\\.)"}	{changeTo:"$1~S$2"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	nielamliwa spacja po skrĂłtach bez kropki przed wilkÄ literÄ
+
+grep	{findWhat:"(no|nr|\\Â§) (\\d)"}	{changeTo:"$1~S$2"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	nielamliwa spacja po skrĂłtach bez kropki przed cyfrÄ literÄ
+
+grep	{findWhat:"sp\\.?\\s?Z\\.?\\s?o\\.?\\s?o\\.?"}	{changeTo:"sp.~Sz~So.o."}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//sp. z o.o.
+
+
+
+
+//spojovĂĄnĂ­ vĂ˝razĹŻ dohromady
+
+grep	{findWhat:"(\\u\\.) (\\u\\.) (\\u\\l)"}	{changeTo:"$1$2~S$3"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	spojit jmĂŠna typu F. X. Ĺ alda
+grep	{findWhat:"(\\u\\.) (\\u\\l)"}	{changeTo:"$1~S$2"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	spojit jmĂŠna typu K. Äapek
+
+
+
+
+grep	{findWhat:"(\\d)(\\s?)(\\%)"}	{changeTo:"$1~<$3", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// procenta s pevnou mezerou
+
+grep	{findWhat:"(\\d+)(\\s?)(m|km|cm|mm|kg|g|t|l|m3|m2|ha|s|min//.|godz//.|zĹ|USD|$|EUR|âŹ)\\>"}	{changeTo:"$1~<$3", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	//Jednostki fizyczne i monetarne â skrĂłty
+
+grep	{findWhat:"(\\d+)(\\s?)(metry|metra|kilometry|kilometra|centymetr|milimetr|gram|kilogram|ton|litr|hektar|zĹotych|zĹotego|sekund|minut|godzin|dni|tygodni|miesiÄc|miesiÄcy|roku|lat)\\>"}	{changeTo:"$1~S$3", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	//Jednostki fizyczne i monetarne 
+
+grep	{findWhat:"(\\u\\w+)\\s(I\\.?|II\\.?|III\\.?|IV\\.?|V\\.?|VI\\.?|VII\\.?|VIII\\.?|IX\\.?|X\\.?)"}	{changeTo:"$1~S$2", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	//Imiona z Cyframi rzymskimi
+
+grep	{findWhat:"(\\w+\\.\\w+|\\w+)\\@\\w+\\.([\\l\\u][\\l\\u][\\l\\u]|[\\l\\u][\\l\\u])"}	{noBreak:true}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//email bez rozdÄlenĂ­ typo a@x.yz nebo a.b@x.yz
+
+
+//matematyka
+
+
+grep	{findWhat:"(?<=\\sm)(2|3)"}	{position:1936749411, changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// metry ÄtvereÄnĂ­ a krychlovĂŠ
+grep	{findWhat:"(\\d+)(\\s?)(x|Ă)(\\s?)(\\d+)"}	{changeTo:"$1~<Ă~<$5", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// krĂĄt mezi ÄĂ­slicemi
+grep	{findWhat:"(\\d+)(\\s?)(+)(\\s?)(\\d+)"}	{changeTo:"$1~<+~<$5", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	// PLUS mezi ÄĂ­slicemi
+grep	{findWhat:"(-|â|â)\\s?(\\d+)\\s?(Â°|Ë|Âş)\\s?C"}	{changeTo:"â$2~SÂ°C"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//stupnÄ Celsia (minus)
+grep	{findWhat:"(\\d+)\\s?(Â°|Ë|Âş)\\s?(C)"}	{changeTo:"$1~SÂ°C"}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true, kanaSensitive:true, widthSensitive:true}	//stupnÄ Celsia sprĂĄvnĂ˝ krouĹžek a pevnĂĄ mezera
+
+
+
+//korekce a vĂ˝jimky na zĂĄvÄr
+
+grep	{findWhat:"(?<=issn |ISSN )(\\d\\d\\d\\d)~=(\\d\\d\\d\\d)"}	{changeTo:"$2-$3", changeConditionsMode:1919250519}	{includeLockedStoriesForFind:false, includeLockedLayersForFind:false, includeHiddenLayers:true, includeMasterPages:true, includeFootnotes:true}	//Korekce ISSN 1234-1234
+
+
+FindChangeByList.jsx
+
+ďťż//FindChangeByList.jsx
+//An InDesign CS6 JavaScript
+/*  
+@@@BUILDINFO@@@ "FindChangeByList.jsx" 3.0.0 15 December 2009
+*/
+//Loads a series of tab-delimited strings from a text file, then performs a series
+//of find/change operations based on the strings read from the file.
+//
+//The data file is tab-delimited, with carriage returns separating records.
+//
+//The format of each record in the file is:
+//findType<tab>findProperties<tab>changeProperties<tab>findChangeOptions<tab>description
+//
+//Where:
+//<tab> is a tab character
+//findType is "text", "grep", or "glyph" (this sets the type of find/change operation to use).
+//findProperties is a properties record (as text) of the find preferences.
+//changeProperties is a properties record (as text) of the change preferences.
+//findChangeOptions is a properties record (as text) of the find/change options.
+//description is a description of the find/change operation
+//
+//Very simple example:
+//text	{findWhat:"--"}	{changeTo:"^_"}	{includeFootnotes:true, includeMasterPages:true, includeHiddenLayers:true, wholeWord:false}	Find all double dashes and replace with an em dash.
+//
+//More complex example:
+//text	{findWhat:"^9^9.^9^9"}	{appliedCharacterStyle:"price"}	{include footnotes:true, include master pages:true, include hidden layers:true, whole word:false}	Find $10.00 to $99.99 and apply the character style "price".
+//
+//All InDesign search metacharacters are allowed in the "findWhat" and "changeTo" properties for findTextPreferences and changeTextPreferences.
+//
+//If you enter backslashes in the findWhat property of the findGrepPreferences object, they must be "escaped"
+//as shown in the example below:
+//
+//{findWhat:"\\s+"}
+//
+//For more on InDesign scripting, go to http://www.adobe.com/products/indesign/scripting/index.html
+//or visit the InDesign Scripting User to User forum at http://www.adobeforums.com
+//
+main();
+function main(){
+	var myObject;
+	//Make certain that user interaction (display of dialogs, etc.) is turned on.
+	app.scriptPreferences.userInteractionLevel = UserInteractionLevels.interactWithAll;
+	if(app.documents.length > 0){
+		if(app.selection.length > 0){
+			switch(app.selection[0].constructor.name){
+				case "InsertionPoint":
+				case "Character":
+				case "Word":
+				case "TextStyleRange":
+				case "Line":
+				case "Paragraph":
+				case "TextColumn":
+				case "Text":
+				case "Cell":
+				case "Column":
+				case "Row":
+				case "Table":
+					myDisplayDialog();
+					break;
+				default:
+					//Something was selected, but it wasn't a text object, so search the document.
+					myFindChangeByList(app.documents.item(0));
+			}
+		}
+		else{
+			//Nothing was selected, so simply search the document.
+			myFindChangeByList(app.documents.item(0));
+		}
+	}
+	else{
+		alert("No documents are open. Please open a document and try again.");
+	}
+}
+function myDisplayDialog(){
+	var myObject;
+	var myDialog = app.dialogs.add({name:"FindChangeByList"});
+	with(myDialog.dialogColumns.add()){
+		with(dialogRows.add()){
+			with(dialogColumns.add()){
+				staticTexts.add({staticLabel:"Search Range:"});
+			}
+			var myRangeButtons = radiobuttonGroups.add();
+			with(myRangeButtons){
+				radiobuttonControls.add({staticLabel:"Document", checkedState:true});
+				radiobuttonControls.add({staticLabel:"Selected Story"});
+				if(app.selection[0].contents != ""){
+					radiobuttonControls.add({staticLabel:"Selection", checkedState:true});
+				}
+			}			
+		}
+	}
+	var myResult = myDialog.show();
+	if(myResult == true){
+		switch(myRangeButtons.selectedButton){
+			case 0:
+				myObject = app.documents.item(0);
+				break;
+			case 1:
+				myObject = app.selection[0].parentStory;
+				break;
+			case 2:
+				myObject = app.selection[0];
+				break;
+		}
+		myDialog.destroy();
+		myFindChangeByList(myObject);
+	}
+	else{
+		myDialog.destroy();
+	}
+}
+function myFindChangeByList(myObject){
+	var myScriptFileName, myFindChangeFile, myFindChangeFileName, myScriptFile, myResult;
+	var myFindChangeArray, myFindPreferences, myChangePreferences, myFindLimit, myStory;
+	var myStartCharacter, myEndCharacter;
+	var myFindChangeFile = myFindFile("/FindChangeSupport/FindChangeList.txt")
+	if(myFindChangeFile != null){
+		myFindChangeFile = File(myFindChangeFile);
+		var myResult = myFindChangeFile.open("r", undefined, undefined);
+		if(myResult == true){
+			//Loop through the find/change operations.
+			do{
+				myLine = myFindChangeFile.readln();
+				//Ignore comment lines and blank lines.
+				if((myLine.substring(0,4)=="text")||(myLine.substring(0,4)=="grep")||(myLine.substring(0,5)=="glyph")){
+					myFindChangeArray = myLine.split("\t");
+					//The first field in the line is the findType string.
+					myFindType = myFindChangeArray[0];
+					//The second field in the line is the FindPreferences string.
+					myFindPreferences = myFindChangeArray[1];
+					//The second field in the line is the ChangePreferences string.
+					myChangePreferences = myFindChangeArray[2];
+					//The fourth field is the range--used only by text find/change.
+					myFindChangeOptions = myFindChangeArray[3];
+					switch(myFindType){
+						case "text":
+							myFindText(myObject, myFindPreferences, myChangePreferences, myFindChangeOptions);
+							break;
+						case "grep":
+							myFindGrep(myObject, myFindPreferences, myChangePreferences, myFindChangeOptions);
+							break;
+						case "glyph":
+							myFindGlyph(myObject, myFindPreferences, myChangePreferences, myFindChangeOptions);
+							break;
+					}
+				}
+			} while(myFindChangeFile.eof == false);
+			myFindChangeFile.close();
+		}
+	}
+}
+function myFindText(myObject, myFindPreferences, myChangePreferences, myFindChangeOptions){
+	//Reset the find/change preferences before each search.
+	app.changeTextPreferences = NothingEnum.nothing;
+	app.findTextPreferences = NothingEnum.nothing;
+	var myString = "app.findTextPreferences.properties = "+ myFindPreferences + ";";
+	myString += "app.changeTextPreferences.properties = " + myChangePreferences + ";";
+	myString += "app.findChangeTextOptions.properties = " + myFindChangeOptions + ";";
+	app.doScript(myString, ScriptLanguage.javascript);
+	myFoundItems = myObject.changeText();
+	//Reset the find/change preferences after each search.
+	app.changeTextPreferences = NothingEnum.nothing;
+	app.findTextPreferences = NothingEnum.nothing;
+}
+function myFindGrep(myObject, myFindPreferences, myChangePreferences, myFindChangeOptions){
+	//Reset the find/change grep preferences before each search.
+	app.changeGrepPreferences = NothingEnum.nothing;
+	app.findGrepPreferences = NothingEnum.nothing;
+	var myString = "app.findGrepPreferences.properties = "+ myFindPreferences + ";";
+	myString += "app.changeGrepPreferences.properties = " + myChangePreferences + ";";
+	myString += "app.findChangeGrepOptions.properties = " + myFindChangeOptions + ";";
+	app.doScript(myString, ScriptLanguage.javascript);
+	var myFoundItems = myObject.changeGrep();
+	//Reset the find/change grep preferences after each search.
+	app.changeGrepPreferences = NothingEnum.nothing;
+	app.findGrepPreferences = NothingEnum.nothing;
+}
+function myFindGlyph(myObject, myFindPreferences, myChangePreferences, myFindChangeOptions){
+	//Reset the find/change glyph preferences before each search.
+	app.changeGlyphPreferences = NothingEnum.nothing;
+	app.findGlyphPreferences = NothingEnum.nothing;
+	var myString = "app.findGlyphPreferences.properties = "+ myFindPreferences + ";";
+	myString += "app.changeGlyphPreferences.properties = " + myChangePreferences + ";";
+	myString += "app.findChangeGlyphOptions.properties = " + myFindChangeOptions + ";";
+	app.doScript(myString, ScriptLanguage.javascript);
+	var myFoundItems = myObject.changeGlyph();
+	//Reset the find/change glyph preferences after each search.
+	app.changeGlyphPreferences = NothingEnum.nothing;
+	app.findGlyphPreferences = NothingEnum.nothing;
+}
+function myFindFile(myFilePath){
+	var myScriptFile = myGetScriptPath();
+	var myScriptFile = File(myScriptFile);
+	var myScriptFolder = myScriptFile.path;
+	myFilePath = myScriptFolder + myFilePath;
+	if(File(myFilePath).exists == false){
+		//Display a dialog.
+		myFilePath = File.openDialog("Choose the file containing your find/change list");
+	}
+	return myFilePath;
+}
+function myGetScriptPath(){
+	try{
+		myFile = app.activeScript;
+	}
+	catch(myError){
+		myFile = myError.fileName;
+	}
+	return myFile;
+}
+
